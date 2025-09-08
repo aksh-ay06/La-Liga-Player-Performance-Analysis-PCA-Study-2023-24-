@@ -1,107 +1,120 @@
-In the modern era of sports analytics, understanding player performance and characteristics through data is crucial for gaining competitive advantages. This project applies Principal Component Analysis (PCA) to La Liga players from the 2023/2024 season.
+📌 Overview
 
-PCA is a statistical technique used to reduce the dimensionality of large datasets while preserving as much variance as possible. By simplifying the complexity of player data, it becomes easier to identify patterns and actionable insights.
+In the modern era of sports analytics, understanding player performance and characteristics through data is crucial for gaining competitive advantages.
 
-Objectives
+This project applies Principal Component Analysis (PCA) to La Liga players from the 2023/2024 season. PCA reduces 150+ performance metrics per player into a concise set of principal components, helping uncover hidden patterns in playing styles, strengths, and weaknesses.
 
-Dimensionality Reduction: Apply PCA to reduce a multidimensional dataset (~150 features per player) into a concise set of principal components.
+🎯 Objectives
 
-Player Comparison: Compare individual players or groups of players based on their PC scores to uncover similarities and differences in styles, strengths, and weaknesses.
+Apply PCA to simplify high-dimensional player data (~150 stats → 4–10 components).
 
-Archetype Discovery: Identify distinct player types (e.g., aerial-dominant vs. ground-dominant defenders).
+Compare individual players and teams via PCA scores.
 
-Actionable Insights: Generate performance indicators to support decisions in player development, recruitment, transfers, and tactical planning.
+Identify player archetypes (e.g., aerial defenders, ball-playing defenders, creative forwards).
+
+Generate actionable insights for recruitment, tactical planning, and performance evaluation.
 
 📂 Data
 
 Source: Kaggle – La Liga Dataset
 
-Size: 681 players × ~150 characteristics
+Players: 681 unique players (~3,600 total records → cleaned & deduplicated).
 
-🛠️ Python Libraries Used
+Features: 150+ characteristics (passes, duels, goals, saves, etc.).
 
-Data Processing: pandas, numpy
+🛠️ Tech Stack
+
+Python: pandas, numpy, scikit-learn
 
 Visualization: matplotlib, seaborn
 
-ML / Stats: scikit-learn
+Methods: PCA, Standardization, Feature Engineering
 
 🔧 Data Cleaning & Preprocessing
 
-Removed players from teams not part of La Liga 2023/24 (e.g., transfers).
+Removed players not active in La Liga 2023/24 (transfers).
 
-Dropped unnecessary columns (e.g., gender, nickname, player.url).
+Dropped unnecessary columns (gender, nickname, player.url, etc.).
 
-Engineered Age from Date of Birth relative to the season start date.
+Engineered Age (from DOB).
 
-Removed duplicates.
+Imputed: height, weight → mean values; other nulls → 0.
 
-Imputed missing height and weight with column means.
+Filtered players with ≥900 minutes played (standard analysis cutoff).
 
-Replaced other nulls with 0 (interpreted as “no contribution”).
+Split by position (Defender, Midfielder, Forward, Goalkeeper).
 
-Filtered out players with <900 minutes played (standard cutoff = 10 full matches).
-
-Split dataset by player position (Defender, Midfielder, Forward, Goalkeeper).
-
-Standardized all numeric features to mean = 0 and std = 1.
+Standardized all features (mean = 0, std = 1).
 
 📊 Results
-PCA on Defenders (Explained Variance ≈ 63%)
+🛡️ PCA on Defenders
 
-PC1: Consistent vs. Irregular Starters (32%)
+Explained Variance: 63% (PC1–PC4)
 
-Positive: Highly involved, reliable defenders (e.g., S. Ramos, J. Koundé).
+PC1 (32%): Consistent Starters vs. Irregular Players
 
-Negative: Injury-prone / inconsistent starters (e.g., D. Alaba, J. Giménez).
+PC2 (16%): Aerial Dominant vs. Ground Dominant
 
-PC2: Aerial Dominant vs. Ground Dominant (16%)
+PC3 (9%): Ball-Playing vs. Defensive Liability
 
-Positive: Ground dominance (e.g., Y. Couto, J. Cancelo).
+PC4 (6%): Goal-Scoring vs. Traditional Defenders
 
-Negative: Aerial dominance (e.g., R. Le Normand, S. Ramos).
+📌 Example:
 
-PC3: Ball-Playing vs. Defensively Liable (9%)
+Positive PC1 → Reliable defenders (e.g., S. Ramos, J. Koundé).
 
-Positive: Strong passers, build from back (e.g., M. Gutiérrez, D. Carvajal).
+Negative PC1 → Injury-prone/inconsistent (D. Alaba, J. Giménez).
 
-Negative: Defensive vulnerabilities, lack of discipline (e.g., R. Marín, A. Abqar).
 
-PC4: Goal-Scoring vs. Traditional Defenders (6%)
+Variance explained by components
 
-Positive: Attack-minded, scoring defenders (e.g., D. Carvajal, E. García).
 
-Negative: Stay-back traditional defenders (e.g., D. Blind, M. Mármol).
+PC1 vs PC2: Archetypes of defenders
 
-👉 Similar PCA performed for forwards (notebooks included). Midfielder and goalkeeper analyses can be extended in the same way.
+🎯 PCA on Forwards
+
+Explained Variance: 63% (PC1–PC4)
+
+PC1: Playmakers/Creators vs. Pure Finishers
+
+PC2: Goal Hunters vs. Inefficient Attackers
+
+PC3: Complete Attackers vs. Physical Ball-Winners
+
+PC4: Advanced Dribblers vs. Deep-Half Forwards
+
+📌 Example:
+
+Positive PC1 → Chance creators (wingers).
+
+Negative PC1 → Classic strikers relying on service.
+
+
+
+
+🏟️ Team-Level Analysis
+
+Aggregated PCA scores (weighted by minutes played) reveal team strengths:
+
+Girona FC, RC Celta, Barcelona → strong attacking indices.
+
+Almería, Villarreal → weaker defensive indices.
+
+
+Aggregated team PCA scores (defensive and attacking dimensions)
 
 🔎 Other Analyses
-1. Team Analysis
 
-Aggregated player PCA scores into team-level scores using minutes-played weighted averages.
+Player Comparison: Compare PCA vectors of players (Euclidean distance / clustering).
 
-Enables comparison of defensive/attacking strengths across clubs.
+Clustering (future): KMeans or DBSCAN on PCA scores for player archetypes.
 
-2. Player Comparisons
-
-Player PC vectors allow clustering or distance-based comparison.
-
-Euclidean distances between PCA score vectors highlight similar vs. contrasting playing styles.
-
-📈 Example Insights
-
-Defenders like Sergio Ramos show high aerial dominance, while João Cancelo excels in ground playmaking.
-
-Teams like Girona FC and Barcelona exhibit strong attacking indices, while Almería and Villarreal lag defensively.
-
-PCA uncovers hidden archetypes (e.g., creators vs. finishers, ball-winners vs. possession stabilizers).
+Recruitment Use Case: Identify undervalued players with similar PCA profiles to stars.
 
 🚀 Future Work
 
-Extend PCA analysis to midfielders & goalkeepers.
+Extend PCA to midfielders and goalkeepers.
 
-Apply clustering (KMeans, DBSCAN) to discover hidden player groups.
+Add clustering & role classification models (e.g., Random Forest).
 
-Build predictive models (e.g., Random Forest, XGBoost) for role classification.
-
-Deploy insights in an interactive dashboard (Plotly/Dash).
+Build an interactive dashboard for coaches and analysts (Plotly/Dash).
