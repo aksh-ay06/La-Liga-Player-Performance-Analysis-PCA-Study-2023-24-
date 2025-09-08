@@ -1,6 +1,6 @@
 # ⚽ Analysis of La Liga 2023/24 Using Unsupervised Learning  
 
-![LaLiga Banner](plots/laliga_banner.png) <!-- optional banner image -->
+
 
 ---
 
