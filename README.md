@@ -60,11 +60,6 @@ Explained Variance: **63% (PC1–PC4)**
 - **Positive PC1** → Reliable defenders (e.g., *S. Ramos, J. Koundé*).  
 - **Negative PC1** → Injury-prone/inconsistent (*D. Alaba, J. Giménez*).  
 
-![Defender Scree Plot](plots/defenders_scree.png)  
-*Variance explained by components*  
-
-![Defender PCA Scores](plots/defenders_pc1_pc2.png)  
-*PC1 vs PC2: Archetypes of defenders*  
 
 ---
 
@@ -80,9 +75,6 @@ Explained Variance: **63% (PC1–PC4)**
 - **Positive PC1** → Chance creators (wingers).  
 - **Negative PC1** → Classic strikers relying on service.  
 
-![Forward Scree Plot](plots/forwards_scree.png)  
-![Forward PCA Scores](plots/forwards_pc1_pc2.png)  
-
 ---
 
 ### 🏟️ Team-Level Analysis  
@@ -91,8 +83,6 @@ Aggregated PCA scores (weighted by minutes played) reveal **team strengths**:
 - **Girona FC, RC Celta, Barcelona** → strong attacking indices.  
 - **Almería, Villarreal** → weaker defensive indices.  
 
-![Team PCA](plots/team_pc1_pc2.png)  
-*Aggregated team PCA scores (defensive and attacking dimensions)*  
 
 ---
 
